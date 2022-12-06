@@ -86,6 +86,7 @@ function saveFormData(){
     let room_details = document.getElementById("room_name").value
     let floor_name = document.getElementById("floor_name").value;
     let input_fault_type = document.getElementById("fault_type").value;
+    let attachment_faults =  document.getElementById("attachment_faults");
 
 
     let report_title = localStorage.setItem("report_title",input_report_title);
@@ -93,11 +94,37 @@ function saveFormData(){
     let building_name_storage = localStorage.setItem("building_name",building_name);
     let room_details_storage = localStorage.setItem("room_details",room_details);
     let floor_name_storage = localStorage.setItem("room_details",floor_name);
-    let fault_type = localStorage.setItem("fault_type",input_fault_type)
+    let fault_type = localStorage.setItem("fault_type",input_fault_type);
+    // Saves image to localStorage
+    if(attachment_faults.files[0]){
+        const file = attachment_faults.files[0];
+        const fr = new FileReader();
+        fr.readAsDataURL(file);
+        fr.addEventListener('load', () => {
+            const url = fr.result
+            localStorage.setItem('image', url.toString());
+            console.log('in here');
+
+            /*
+            To get image from local storage: (Will use later)
+            const url = localStorage.getItem('image');
+            // Get data URL from localStorage
+                const img = new Image();
+                img.src = url;
+                document.body.appendChild(img);
+            // Set URL as src of image and append to DOM
+             */
+            console.log(localStorage.getItem('image'));
+
+        });
+    }
+
+
 }
 
 
 function RenderMyReportsPage(){
+    //Set arrays for items for the table
     let assignedStatus = ['Assigned', 'Unassigned']
     let Months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     let DaysOfTheMonth =['Offset', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '9th', '10th', '11th', '12th', '13th', '14th', '15th', '16th', '17th', '18th', '19th', '20th', '21st', '22nd', '23rd', '24th', '25th', '26th','27th', '28th', '29th', '30th', '31st']
@@ -110,10 +137,7 @@ function RenderMyReportsPage(){
     let row = document.createElement('tr');
     //Add id column
     let ID_column = document.createElement('td');
-    ID_column.textContent= randomID;
-
-
-
+    ID_column.textContent= "#"+randomID;
     let reportTitle = document.createElement('td');
     reportTitle.textContent = localStorage.getItem("report_title");
     let fault_type = document.createElement('td');
@@ -126,32 +150,24 @@ function RenderMyReportsPage(){
     let fullCurrentDate = currentDay + " " + currentMonth + " " + "2022"
     let currentDateColumn = document.createElement('td');
     currentDateColumn.textContent = fullCurrentDate
-    let randomDate = Months[monthsID] + " " + DaysOfTheMonth[daysOfTheMonthsID] + " " + "2022";
+    let randomDate = DaysOfTheMonth[daysOfTheMonthsID] + " " + Months[monthsID] + " " + "2022";
+    let randomDateColumn = document.createElement("td");
+    randomDateColumn.textContent = randomDate;
     //let month = date.getMonth().toDateString();
     //let currentDate =date.toDateString().split(" ")[];
-    console.log(randomDate);
-    let column_elements = [ID_column, reportTitle, fault_type, status_column, currentDateColumn, randomDate]
+    //console.log(randomDate);
+    let column_elements = [ID_column, reportTitle, fault_type, status_column, currentDateColumn, randomDateColumn]
 
-
-
-
-    for(var i=0; i < 6; i++){
-
+    //Append column information to the row
+    for(let i=0; i < 6; i++){
+        console.log(column_elements[i]);
+        row.appendChild(column_elements[i]);
     }
 
+    //Append content to the table;
+    let table_body = document.getElementById("reports_table_id_body");
+    table_body.appendChild(row)
 
-
-   /* for(var i = 0; i <document.report_form.elements.length; i++){
-        var fieldName = document.report_form.elements[i].name;
-        var fieldValue = document.report_form.elements[i].value
-        let column = document.createElement('td');
-        if(fieldValue){
-            column.textContent = fieldValue;
-            row.appendChild(column);
-        }
-    }
-    let table = document.getElementById("reports-table-id");
-    table.appendChild(row)*/
 
     var navLinks = $('.nav-bar-link');
     //Saved tab2 html table at the start
@@ -159,8 +175,6 @@ function RenderMyReportsPage(){
     $('#tab2_page').show()
     navLinks.removeClass('active_tab')
    $('#tab2').addClass('active_tab')
-    var tab = navLinks.attr('id')
-
 }
 
 function tableCardClick() {

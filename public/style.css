@@ -389,7 +389,7 @@ label{
     /*Hiding the input button*/
 
     opacity: 0;
-    overflow: hidden;
+    /*overflow: hidden;*/
     position: absolute;
 
 }
