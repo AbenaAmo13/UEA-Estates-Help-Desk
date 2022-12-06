@@ -5,10 +5,20 @@ function ReportFaultDisplay(){
 
     tableCardClick();
     reportMobileView();
+    uploadImageTextChanger();
         //getData();
    /*const form = document.querySelector('form');
     form.addEventListener('submit', handleSubmit);*/
 
+}
+
+/*This function */
+function uploadImageTextChanger(){
+ const fileInput = document.getElementById("attachment_faults");
+    fileInput.addEventListener('change' , () => {
+        const fileName = fileInput.files[0].name;
+        document.getElementById("file_name_id").textContent = " "+ fileName;
+    })
 }
 
 function nav_bar_display_change(){
@@ -23,59 +33,6 @@ function nav_bar_display_change(){
 function tab2_reportform_display() {
     $('#tab3_page').empty();
 }
-/*
-function report_page_cards_onClick(){
-    $(".card-list-item").click(function(){
-        var card_id = $(this).attr('id');
-        if (card_id.includes("1")){
-            if(!$('#tab3').hasClass('active_tab')){ //this is the start of our condition
-                $('.nav-bar-link').removeClass('active_tab');
-                $('#tab3').addClass('active_tab');
-                $('.tab_pages').hide();
-                $('#tab3_page').fadeIn('slow');
-            }
-        }else
-            if (card_id.includes("tab2_card_option")){
-            if(!$('#tab2').hasClass('active_tab')){ //this is the start of our condition
-                $('.nav-bar-link').removeClass('active_tab');
-                $('#tab2').addClass('active_tab');
-                $('.tab_pages').hide();
-                $('#tab2_page').fadeIn('slow');
-            }
-        }
-            else
-            if (card_id.includes("3")) {
-                if (!$('#tab4').hasClass('active_tab')) { //this is the start of our condition
-                    $('.nav-bar-link').removeClass('active_tab');
-                    $('#tab4').addClass('active_tab');
-                    $('.tab_pages').hide();
-                    $('#tab4_page').fadeIn('slow');
-                }
-            }
-    });
-}
-*/
-
-//Take form to JSON object
-
-
-/*
-function handleSubmit(event) {
-    const form = document.getElementsByClassName('form');
-    event.preventDefault();
-
-    const data = formToJSON(form.elements);
-
-    //const value = Object.fromEntries(data.entries());
-
-    const json = JSON.stringify(data)
-
-    console.log({ value });
-    console.log(json);
-}
-*/
-
-
 
 
 function saveFormData(){
@@ -242,64 +199,15 @@ function submitFormAction(){
        console.log(report_title);
 }
 
- function newTableRowToAppend(report_title, fault_type, status, date_reported, expected_resolve_date){
-var row_to_append ="<tr>\n" +
-    "                <td class=\"report_id\">1650</td>\n" +
-    "                <td class=\"report_title\">Broken door</td>\n" +
-    "                <td class=\"category_type\">Other</td>\n" +
-    "                <td class=\"status\">Unassigned</td>\n" +
-    "                <td class=\"reported_date\">18th December 2022</td>\n" +
-    "                <td class=\"expected_date\">20th December 2022</td>\n" +
-    "            </tr>"
-
-     document.get
-
-
- }
 
  function reportMobileView(){
     if(isMobileWidth()){
-        $('.table_class').empty();
-        $('.table_class')
+        let report_table =  $('.table_class');
+        report_table.empty();
         $('.input_stylings').remove();
 
 
     }
- }
-
- function appendTable(){
-     $(document).ready(function () {
-
-         // FETCHING DATA FROM JSON FILE
-         $.getJSON("report.json",
-             function (data) {
-                 var student = '';
-
-                 // ITERATING THROUGH OBJECTS
-                 $.each(data, function (key, value) {
-
-                     //CONSTRUCTION OF ROWS HAVING
-                     // DATA FROM JSON OBJECT
-                     student += '<tr>';
-                     student += '<td>' +
-                         value.GFGUserName + '</td>';
-
-                     student += '<td>' +
-                         value.NoOfProblems + '</td>';
-
-                     student += '<td>' +
-                         value.TotalScore + '</td>';
-
-                     student += '<td>' +
-                         value.Articles + '</td>';
-
-                     student += '</tr>';
-                 });
-
-                 //INSERTING ROWS INTO TABLE
-                 $('#table').append(student);
-             });
-     });
  }
 
 
