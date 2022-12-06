@@ -2,11 +2,12 @@ function ReportFaultDisplay(){
     let savedTable =  $("table").html();
     //All the functions for the report page
     nav_bar_display_change();
-    tab1_home_display();
 
     tableCardClick();
     reportMobileView();
         //getData();
+   /*const form = document.querySelector('form');
+    form.addEventListener('submit', handleSubmit);*/
 
 }
 
@@ -17,16 +18,7 @@ function nav_bar_display_change(){
     $('#tab3').text("Report Fault");
 }
 
-function tab1_home_display(){
-    $('#tab1_card_button').text("Report a fault");
-    $("#tab1_card_image").attr("src","images/report_image_4.png");
 
-    $('#tab2_card_button').text("My reported faults");
-    $("#tab2_card_image").attr("src","images/my_reports.png");
-
-    $('#tab3_card_button').text("Relevant Information");
-    $("#tab3_card_image").attr("src","images/info.png");
-}
 
 function tab2_reportform_display() {
     $('#tab3_page').empty();
@@ -64,6 +56,113 @@ function report_page_cards_onClick(){
 }
 */
 
+//Take form to JSON object
+
+
+/*
+function handleSubmit(event) {
+    const form = document.getElementsByClassName('form');
+    event.preventDefault();
+
+    const data = formToJSON(form.elements);
+
+    //const value = Object.fromEntries(data.entries());
+
+    const json = JSON.stringify(data)
+
+    console.log({ value });
+    console.log(json);
+}
+*/
+
+
+
+
+function saveFormData(){
+    //Save the form data to local storage
+    let input_report_title = document.getElementById("report_title").value;
+    let report_description = document.getElementById("report_description").value;
+    let building_name = document.getElementById("building_names").value;
+    let room_details = document.getElementById("room_name").value
+    let floor_name = document.getElementById("floor_name").value;
+    let input_fault_type = document.getElementById("fault_type").value;
+
+
+    let report_title = localStorage.setItem("report_title",input_report_title);
+    let report_description_storage = localStorage.setItem("report_description",report_description)
+    let building_name_storage = localStorage.setItem("building_name",building_name);
+    let room_details_storage = localStorage.setItem("room_details",room_details);
+    let floor_name_storage = localStorage.setItem("room_details",floor_name);
+    let fault_type = localStorage.setItem("fault_type",input_fault_type)
+}
+
+
+function RenderMyReportsPage(){
+    let assignedStatus = ['Assigned', 'Unassigned']
+    let Months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    let DaysOfTheMonth =['Offset', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '9th', '10th', '11th', '12th', '13th', '14th', '15th', '16th', '17th', '18th', '19th', '20th', '21st', '22nd', '23rd', '24th', '25th', '26th','27th', '28th', '29th', '30th', '31st']
+    //Save local storage data.
+    saveFormData();
+    let randomID= Math.floor((Math.random() * 2000) + 1000);
+    let assignedStatusID= Math.floor((Math.random() * 2));
+    let monthsID = Math.floor(Math.random() * 12);
+    let daysOfTheMonthsID = Math.floor(Math.random() * 31) + 1;
+    let row = document.createElement('tr');
+    //Add id column
+    let ID_column = document.createElement('td');
+    ID_column.textContent= randomID;
+
+
+
+    let reportTitle = document.createElement('td');
+    reportTitle.textContent = localStorage.getItem("report_title");
+    let fault_type = document.createElement('td');
+    fault_type.textContent = localStorage.getItem("fault_type");
+    let status_column = document.createElement('td');
+    status_column.textContent = assignedStatus[assignedStatusID]
+    let date = new Date();
+    let currentMonth = Months[date.getMonth()];
+    let currentDay = DaysOfTheMonth[date.getDate()];
+    let fullCurrentDate = currentDay + " " + currentMonth + " " + "2022"
+    let currentDateColumn = document.createElement('td');
+    currentDateColumn.textContent = fullCurrentDate
+    let randomDate = Months[monthsID] + " " + DaysOfTheMonth[daysOfTheMonthsID] + " " + "2022";
+    //let month = date.getMonth().toDateString();
+    //let currentDate =date.toDateString().split(" ")[];
+    console.log(randomDate);
+    let column_elements = [ID_column, reportTitle, fault_type, status_column, currentDateColumn, randomDate]
+
+
+
+
+    for(var i=0; i < 6; i++){
+
+    }
+
+
+
+   /* for(var i = 0; i <document.report_form.elements.length; i++){
+        var fieldName = document.report_form.elements[i].name;
+        var fieldValue = document.report_form.elements[i].value
+        let column = document.createElement('td');
+        if(fieldValue){
+            column.textContent = fieldValue;
+            row.appendChild(column);
+        }
+    }
+    let table = document.getElementById("reports-table-id");
+    table.appendChild(row)*/
+
+    var navLinks = $('.nav-bar-link');
+    //Saved tab2 html table at the start
+    $('.tab_pages').hide()
+    $('#tab2_page').show()
+    navLinks.removeClass('active_tab')
+   $('#tab2').addClass('active_tab')
+    var tab = navLinks.attr('id')
+
+}
+
 function tableCardClick() {
     $("tr").click(function () {
         let inSideReport = true;
@@ -76,16 +175,9 @@ function tableCardClick() {
         let date_reported = splittedInformation[5];
         let expected_resolve_date = splittedInformation[6]
         console.log(report_title);
-
-
     });
 }
-/*
-function submitFormRedirect{
 
-}
-
-*/
 
 
 //Initialize the get request from the client side.
@@ -126,7 +218,7 @@ function submitFormAction(){
 
 
     column.textContent =  report_title;
-    c
+
 
 
 
@@ -159,6 +251,41 @@ var row_to_append ="<tr>\n" +
 
 
     }
+ }
+
+ function appendTable(){
+     $(document).ready(function () {
+
+         // FETCHING DATA FROM JSON FILE
+         $.getJSON("report.json",
+             function (data) {
+                 var student = '';
+
+                 // ITERATING THROUGH OBJECTS
+                 $.each(data, function (key, value) {
+
+                     //CONSTRUCTION OF ROWS HAVING
+                     // DATA FROM JSON OBJECT
+                     student += '<tr>';
+                     student += '<td>' +
+                         value.GFGUserName + '</td>';
+
+                     student += '<td>' +
+                         value.NoOfProblems + '</td>';
+
+                     student += '<td>' +
+                         value.TotalScore + '</td>';
+
+                     student += '<td>' +
+                         value.Articles + '</td>';
+
+                     student += '</tr>';
+                 });
+
+                 //INSERTING ROWS INTO TABLE
+                 $('#table').append(student);
+             });
+     });
  }
 
 

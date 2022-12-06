@@ -102,7 +102,7 @@
         <p>In case of an emergency, e.g Gas leaks, please call us on 01603 592121</p>
     </div>
     <div class="card" id="tab1_card_form">
-        <form  class="form" onsubmit="submitFormAction();return false;">
+        <form  class="form" onsubmit="RenderMyReportsPage(); return false" name="report_form">
             <div id="details_text_div">
                 <h3 id="details_text"> Details  </h3>
                 <div id="asterix_and_compulsory_div">
@@ -125,15 +125,13 @@
                     <label for="report_description"> Description</label>
                 <label for="report_description" class="asterix"> *</label>
                 </span>
-
                 <input type="text" id="report_description" name="report_descriptions" required minlength="10" >
             </div>
             <div class="form-input-div">
                 <span>
-                    <label>Building or location name </label>
-                <label for="report_description" class="asterix"> *</label>
+                    <label for="building_names">Building or location name </label>
+                <label for="building_names" class="asterix"> *</label>
                 </span>
-
                 <input list="building_names" name="building_name" id="building_name" required aria-required="true">
                 <datalist id="building_names">
                     <option value="Colman House">
@@ -146,7 +144,7 @@
             <div class="form-input-div">
                 <span>
                     <label for="room_name">Room details</label>
-                    <label for="report_title">E.g EH 1.25</label>
+                    <label for="room_name">E.g EH 1.25</label>
                 </span>
                 <input type="text" id="room_name" name="room_name">
                 <label for="floor_name">Floor</label>
@@ -161,22 +159,10 @@
                     <option>Other</option>
                 </select>
             </div>
-
-            <!---
             <div class="form-input-div">
-                <label for="fault_attachment">Attachments</label>
-                <input type="file" name="fault_attachment" id="fault_attachment" class="inputfile" />
-                <span id="attachment_span">
-                    <i class="material-icons nav-bar" alt="camera">photo_camera</i>
-                    <i class="material-icons nav-bar" alt="add icon">add</i>
-                    <p>Add</p>
-                    <i class="material-icons nav-bar" alt="video icon">play_arrow</i>
-                </div>
-            --->
-            <div class="form-input-div">
-                <label for="fault_attachment">Attachments</label>
+                <label for="attachment_faults">Attachments</label>
                 <span  id="fault_attachment">
-                    <input type="file" name="fault_attachment" class="inputfile" />
+                    <input type="file" name="fault_attachment" class="inputfile" id="attachment_faults" />
                     <span id="attachment_span">
                             <span id="add_section">
                                 <i class="material-icons nav-bar" alt="add icon">add</i>
@@ -203,39 +189,13 @@
 
         <input type="text" placeholder="Search reports" class="search-bar">
         <span id="reported-faults-records">
-             <p>2 records</p>
-            <nav role="navigation" aria-label="Pagination Navigation" id="pages-nav">
-                <ul>
-                    <li class="pages-link"><a href="/page-1" aria-label="Pages back button">&laquo;</a></li>
-                    <li class="pages-link"><a href="/page-1" aria-label="Goto Page 1">1</a></li>
-                    <li class="pages-link"><a href="/page-2" aria-label="Goto Page 2">2</a></li>
-                    <li class="pages-link"><a href="/page-3" aria-label="Pages forward button">&raquo;</a></li>
-                </ul>
-            </nav>
         </span>
 
-        <!---
-            <div class="input_stylings">
-                <select>
-                    <option>Open Tickets</option>
-                    <option>Closed Tickets</option>
-                </select>
-                <input type="text" placeholder="Search reports" class="search-bar">
-            </div>
-            --->
     </div>
-    <div class="records">
-        <ul>
-            <li class="report-records-lists">
-                <a href="" aria-label="Pages back button">
-                    <span><h2>Torn Chair</h2></span>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <!--
+
+
     <div class="table_class">
-        <table class="border large-space">
+        <table class="border large-space" id="reports-table-id">
             <caption>My reports table</caption>
             <thead>
             <tr id="table-headings">
@@ -284,7 +244,7 @@
             </tbody>
         </table>
     </div>
-    --->
+
 
 
 </div>
