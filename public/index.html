@@ -44,7 +44,6 @@
         <ul class="menu">
             <li><a class="nav-bar-link" id="tab1"> Report Fault</a></li>
             <li><a class="nav-bar-link" id="tab2">My reports</a></li>
-            <li> <a class="nav-bar-link" id="tab3">Report fault </a></li>
             <li><a class="nav-bar-link" id="tab4"> Help</a></li>
             <li><a class="nav-bar-link" id="tab5"> Allocator's View</a></li>
             <li><a class="nav-bar-link" id="tab6"> Technician's View</a></li>
@@ -102,7 +101,7 @@
         <p>In case of an emergency, e.g Gas leaks, please call us on 01603 592121</p>
     </div>
     <div class="card" id="tab1_card_form">
-        <form  class="form" onsubmit="RenderMyReportsPage(); return false" name="report_form">
+        <form  class="form"  name="report_form" id="reports_form" >
             <div id="details_text_div">
                 <h3 id="details_text"> Details  </h3>
                 <div id="asterix_and_compulsory_div">
@@ -175,6 +174,13 @@
                 <button type="submit" class="report_form" id="submit-button">Submit</button>
             </div>
         </form>
+        <div id="form-submit-modal">
+            <div id="submit-modal-content" aria-label="submitted form modal">
+                <span class="close">&times;</span>
+                <p>Form has been successfully submitted</p>
+
+            </div>
+        </div>
     </div>
 </div>
 <div class="tab_pages" id="tab2_page">
@@ -241,9 +247,6 @@
             </tbody>
         </table>
     </div>
-
-
-
 </div>
 <div class="tab_pages" id="tab3_page"></div>
 <div class="tab_pages" id="tab4_page">
