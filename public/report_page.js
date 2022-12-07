@@ -1,7 +1,54 @@
+
 function ReportFaultDisplay(){
+    //Form handling:
+    const getReports = JSON.parse(localStorage.getItem("reports"));
+    console.log(getReports);
+    if(getReports){
+        getReports.forEach((report) => {
+        //Append relevant report information the my reports table:
+            let title_report = report[0];
+            let fault_type = report[5];
+            console.log(title_report)
+      RenderMyReportsPage(title_report, fault_type);
+        });
+    }
+
+    let report_form = document.getElementById("reports_form");
+    let fileName = imageData();
+    let reportArray=[]
+    let report = localStorage.getItem("reports")
+        ? JSON.parse(localStorage.getItem("reports"))
+        : [];
+    report_form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        alert('Form has been submitted');
+        for(let i= 0; i<document.report_form.elements.length; i++){
+            let fieldName = document.report_form.elements[i].name;
+            let fieldValue = document.report_form.elements[i].value;
+            if((fieldName==="attachment_faults") && (fieldValue)){
+                fileName = uploadImageTextChanger(fieldValue);
+                console.log(fileName)
+;                //reportItems.push(fileName)
+
+            }else if(fieldValue){
+                reportArray.push(fieldValue)
+            }
+        }
+        report.push(reportArray)
+        localStorage.setItem("reports", JSON.stringify(report));
+        var navLinks = $('.nav-bar-link')
+        //Saved tab2 html table at the start
+        $('.tab_pages').hide()
+        $('#tab2_page').show()
+        navLinks.removeClass('active_tab')
+        $('#tab2').addClass('active_tab')
+    });
+
     let savedTable =  $("table").html();
+    let report_submits_arrays = [];
     //All the functions for the report page
-    nav_bar_display_change();
+    //nav_bar_display_change();
+
 
     tableCardClick();
     reportMobileView();
@@ -10,8 +57,16 @@ function ReportFaultDisplay(){
    /*const form = document.querySelector('form');
     form.addEventListener('submit', handleSubmit);*/
 
+
 }
 
+
+function renderTableVersion2(reportItems){
+
+}
+
+
+let ReportFormData=[];
 /*This function */
 function uploadImageTextChanger(){
  const fileInput = document.getElementById("attachment_faults");
@@ -34,8 +89,8 @@ function tab2_reportform_display() {
     $('#tab3_page').empty();
 }
 
-
 function saveFormData(){
+
     //Save the form data to local storage
     let input_report_title = document.getElementById("report_title").value;
     let report_description = document.getElementById("report_description").value;
@@ -44,7 +99,6 @@ function saveFormData(){
     let floor_name = document.getElementById("floor_name").value;
     let input_fault_type = document.getElementById("fault_type").value;
     let attachment_faults =  document.getElementById("attachment_faults");
-
 
     let report_title = localStorage.setItem("report_title",input_report_title);
     let report_description_storage = localStorage.setItem("report_description",report_description)
@@ -59,45 +113,80 @@ function saveFormData(){
         fr.readAsDataURL(file);
         fr.addEventListener('load', () => {
             const url = fr.result
-            localStorage.setItem('image', url.toString());
-            console.log('in here');
+            let image_data = localStorage.setItem('image', url.toString());
+        })
+    }
 
-            /*
-            To get image from local storage: (Will use later)
+/*
+            //To get image from local storage: (Will use later)
             const url = localStorage.getItem('image');
             // Get data URL from localStorage
                 const img = new Image();
                 img.src = url;
                 document.body.appendChild(img);
             // Set URL as src of image and append to DOM
-             */
-            console.log(localStorage.getItem('image'));
+
+            //console.log(localStorage.getItem('image'));
 
         });
+
+ */
     }
 
 
-}
+    function generateReportID(){
 
 
-function RenderMyReportsPage(){
+    }
+
+
+
+
+
+function RenderMyReportsPage(title_of_report, type_of_fault) {
     //Set arrays for items for the table
     let assignedStatus = ['Assigned', 'Unassigned']
     let Months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-    let DaysOfTheMonth =['Offset', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '9th', '10th', '11th', '12th', '13th', '14th', '15th', '16th', '17th', '18th', '19th', '20th', '21st', '22nd', '23rd', '24th', '25th', '26th','27th', '28th', '29th', '30th', '31st']
+    let DaysOfTheMonth = ['Offset', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '9th', '10th', '11th', '12th', '13th', '14th', '15th', '16th', '17th', '18th', '19th', '20th', '21st', '22nd', '23rd', '24th', '25th', '26th', '27th', '28th', '29th', '30th', '31st']
     //Save local storage data.
     saveFormData();
-    let randomID= Math.floor((Math.random() * 2000) + 1000);
-    let assignedStatusID= Math.floor((Math.random() * 2));
+
+    let assignedStatusID = Math.floor((Math.random() * 2));
     let monthsID = Math.floor(Math.random() * 12);
     let daysOfTheMonthsID = Math.floor(Math.random() * 31) + 1;
     let row = document.createElement('tr');
     //Add id column
+    let randomID = Math.floor((Math.random() * 2000) + 1000);
     let ID_column = document.createElement('td');
-    ID_column.textContent= "#"+randomID;
+    ID_column.textContent = "#" + randomID;
     let reportTitle = document.createElement('td');
-    reportTitle.textContent = localStorage.getItem("report_title");
+    reportTitle.textContent = title_of_report;
+    console.log(reportTitle);
     let fault_type = document.createElement('td');
+    fault_type.textContent = type_of_fault;
+    let status_column = document.createElement('td');
+    status_column.textContent = assignedStatus[assignedStatusID]
+    let date = new Date();
+    let currentMonth = Months[date.getMonth()];
+    let currentDay = DaysOfTheMonth[date.getDate()];
+    let fullCurrentDate = currentDay + " " + currentMonth + " " + "2022"
+    let currentDateColumn = document.createElement('td');
+    currentDateColumn.textContent = fullCurrentDate
+    let randomDate = DaysOfTheMonth[daysOfTheMonthsID] + " " + Months[monthsID] + " " + "2022";
+    let randomDateColumn = document.createElement("td");
+    randomDateColumn.textContent = randomDate;
+    let column_elements = [ID_column, reportTitle, fault_type, status_column, currentDateColumn, randomDateColumn]
+
+    //Append column information to the row
+    for (let i = 0; i < 6; i++) {
+        console.log(column_elements[i]);
+        row.appendChild(column_elements[i]);
+    }
+
+    let table_body = document.getElementById("reports_table_id_body");
+    table_body.appendChild(row);
+
+    /*
     fault_type.textContent = localStorage.getItem("fault_type");
     let status_column = document.createElement('td');
     status_column.textContent = assignedStatus[assignedStatusID]
@@ -115,25 +204,41 @@ function RenderMyReportsPage(){
     //console.log(randomDate);
     let column_elements = [ID_column, reportTitle, fault_type, status_column, currentDateColumn, randomDateColumn]
 
+    //Form has been submitted
+
+
     //Append column information to the row
-    for(let i=0; i < 6; i++){
+    for (let i = 0; i < 6; i++) {
         console.log(column_elements[i]);
         row.appendChild(column_elements[i]);
     }
 
+
     //Append content to the table;
     let table_body = document.getElementById("reports_table_id_body");
-    table_body.appendChild(row)
-
-
-    var navLinks = $('.nav-bar-link');
-    //Saved tab2 html table at the start
-    $('.tab_pages').hide()
-    $('#tab2_page').show()
-    navLinks.removeClass('active_tab')
-   $('#tab2').addClass('active_tab')
+    table_body.appendChild(row);*/
+/*
+        var navLinks = $('.nav-bar-link')
+        //Saved tab2 html table at the start
+        $('.tab_pages').hide()
+        $('#tab2_page').show()
+        navLinks.removeClass('active_tab')
+       $('#tab2').addClass('active_tab')*/
 }
+function closedModal() {
+    let closed_button = document.getElementsByClassName("close")[0];
+    let modal = document.getElementById("form-submit-modal");
 
+    closed_button.onclick = function () {
+        modal.style.display = "none";
+    }
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    }
+}
 function tableCardClick() {
     $("tr").click(function () {
         let inSideReport = true;
@@ -155,49 +260,55 @@ function tableCardClick() {
 //Whenever the user loads the page, you have to make the request.
 
 
-/* function getData(){
-       fetch('/getData', {
-           method: 'get',
-           headers: {
-               'Accept': 'application/json, text/plain, *!/!*',
-                'Content-Type': 'application/json'
-            },
-            }).then(res => res.json()) //res.json decodes the json file.
-           .then(res => {
-               newTableRowToAppend()
-
-           //document.getElementById("information").innerText = res.report_title
-             });
- }*/
-
-function submitFormAction(){
-    var table = document.getElementById("myTable");
-    alert("Form has been submitted");
-    let report_title = $('#report_title').val();
-    let report_description = $('#report_description').val();
-    let building_name = $('#building_name').val();
-    let room_name = $('#room_name').val();
-    let fault_type = $('#fault_type').val();
-    let status = 'Unassigned';
-    const date = new Date();
-
-    let row = document.createElement("tr");
-    let column_report_title = document.createElement("td").setAttribute("class", "report_title");
-    let column_report_description = document.createElement("td").setAttribute("class", "report_description");
-    let column_building_name = document.createElement("td").setAttribute("class", "building_name");
-    let column_room_name = document.createElement("td").setAttribute("class", "room_name ");
-
-
-    column.textContent =  report_title;
+function getFormData(){
+    const formId = "reports-form"; // ID of the form
+    const url = location.href; //  href for the page
+    const formIdentifier = `${url} ${formId}`; // Identifier used to identify the form
+    //const saveButton = document.querySelector("#save"); // select save button
+    //const alertBox = document.querySelector(".alert"); // select alert display div
+    let form = document.querySelector(`#${formId}`); // select form
 
 
 
+    return data;
 
-
-
-
-       console.log(report_title);
 }
+
+
+function populateTable(){
+
+}
+
+function imageData(fieldValue) {
+    let attachment_faults = document.getElementById("attachment_faults");
+    if (attachment_faults.files[0]) {
+        const file = attachment_faults.files[0];
+        const fr = new FileReader();
+        fr.readAsDataURL(file);
+        fr.addEventListener('load', () => {
+            const url = fr.result
+            const fileName = url.toString();
+            console.log(fileName);
+
+            let image_data = localStorage.setItem('image', url.toString());
+            /*
+            To get image from local storage: (Will use later)
+            const url = localStorage.getItem('image');
+            // Get data URL from localStorage
+                const img = new Image();
+                img.src = url;
+                document.body.appendChild(img);
+            // Set URL as src of image and append to DOM
+             */
+            //console.log(localStorage.getItem('image'));
+            return fileName;
+
+        });
+
+    }
+}
+
+
 
 
  function reportMobileView(){
@@ -211,20 +322,10 @@ function submitFormAction(){
  }
 
 
- //
- function reportViewHTML(){
-        var headings = " <select>\n" +
-            "            <option>Open Tickets</option>\n" +
-            "            <option>Closed Tickets</option>\n" +
-            "        </select>\n" +
-            "\n" +
-            "        <input type=\"text\" placeholder=\"Search reports\" class=\"search-bar\">"
 
+function isMobileWidth(){
+    console.log($('#mobile-indicator').is(':visible'))
+    return $('#mobile-indicator').is(':visible')
  }
 
-function isMobileWidth() {
 
-    console.log($('#mobile-indicator').is(':visible'));
-    return $('#mobile-indicator').is(':visible');
-}
- //getData()
