@@ -1,6 +1,8 @@
 
 function ReportFaultDisplay(){
     //Form handling:
+
+
     const getReports = JSON.parse(localStorage.getItem("reports"));
     console.log(getReports);
     if(getReports){
@@ -21,7 +23,6 @@ function ReportFaultDisplay(){
         : [];
     report_form.addEventListener("submit", (e) => {
         e.preventDefault();
-        alert('Form has been submitted');
         for(let i= 0; i<document.report_form.elements.length; i++){
             let fieldName = document.report_form.elements[i].name;
             let fieldValue = document.report_form.elements[i].value;
@@ -36,13 +37,12 @@ function ReportFaultDisplay(){
         }
         report.push(reportArray)
         localStorage.setItem("reports", JSON.stringify(report));
-        var navLinks = $('.nav-bar-link')
-        //Saved tab2 html table at the start
-        $('.tab_pages').hide()
-        $('#tab2_page').show()
-        navLinks.removeClass('active_tab')
-        $('#tab2').addClass('active_tab')
+        document.getElementById("form-submit-modal").style.display="block";
     });
+
+    $(".close").click(function (){
+        document.getElementById("form-submit-modal").style.display="none";
+    })
 
     let savedTable =  $("table").html();
     let report_submits_arrays = [];
@@ -65,6 +65,9 @@ function renderTableVersion2(reportItems){
 
 }
 
+function closeForm(){
+
+}
 
 let ReportFormData=[];
 /*This function */
@@ -85,27 +88,8 @@ function nav_bar_display_change(){
 
 
 
-function tab2_reportform_display() {
-    $('#tab3_page').empty();
-}
-
 function saveFormData(){
-
-    //Save the form data to local storage
-    let input_report_title = document.getElementById("report_title").value;
-    let report_description = document.getElementById("report_description").value;
-    let building_name = document.getElementById("building_names").value;
-    let room_details = document.getElementById("room_name").value
-    let floor_name = document.getElementById("floor_name").value;
-    let input_fault_type = document.getElementById("fault_type").value;
     let attachment_faults =  document.getElementById("attachment_faults");
-
-    let report_title = localStorage.setItem("report_title",input_report_title);
-    let report_description_storage = localStorage.setItem("report_description",report_description)
-    let building_name_storage = localStorage.setItem("building_name",building_name);
-    let room_details_storage = localStorage.setItem("room_details",room_details);
-    let floor_name_storage = localStorage.setItem("room_details",floor_name);
-    let fault_type = localStorage.setItem("fault_type",input_fault_type);
     // Saves image to localStorage
     if(attachment_faults.files[0]){
         const file = attachment_faults.files[0];
@@ -134,10 +118,7 @@ function saveFormData(){
     }
 
 
-    function generateReportID(){
 
-
-    }
 
 
 
@@ -186,37 +167,7 @@ function RenderMyReportsPage(title_of_report, type_of_fault) {
     let table_body = document.getElementById("reports_table_id_body");
     table_body.appendChild(row);
 
-    /*
-    fault_type.textContent = localStorage.getItem("fault_type");
-    let status_column = document.createElement('td');
-    status_column.textContent = assignedStatus[assignedStatusID]
-    let date = new Date();
-    let currentMonth = Months[date.getMonth()];
-    let currentDay = DaysOfTheMonth[date.getDate()];
-    let fullCurrentDate = currentDay + " " + currentMonth + " " + "2022"
-    let currentDateColumn = document.createElement('td');
-    currentDateColumn.textContent = fullCurrentDate
-    let randomDate = DaysOfTheMonth[daysOfTheMonthsID] + " " + Months[monthsID] + " " + "2022";
-    let randomDateColumn = document.createElement("td");
-    randomDateColumn.textContent = randomDate;
-    //let month = date.getMonth().toDateString();
-    //let currentDate =date.toDateString().split(" ")[];
-    //console.log(randomDate);
-    let column_elements = [ID_column, reportTitle, fault_type, status_column, currentDateColumn, randomDateColumn]
 
-    //Form has been submitted
-
-
-    //Append column information to the row
-    for (let i = 0; i < 6; i++) {
-        console.log(column_elements[i]);
-        row.appendChild(column_elements[i]);
-    }
-
-
-    //Append content to the table;
-    let table_body = document.getElementById("reports_table_id_body");
-    table_body.appendChild(row);*/
 /*
         var navLinks = $('.nav-bar-link')
         //Saved tab2 html table at the start
@@ -260,24 +211,6 @@ function tableCardClick() {
 //Whenever the user loads the page, you have to make the request.
 
 
-function getFormData(){
-    const formId = "reports-form"; // ID of the form
-    const url = location.href; //  href for the page
-    const formIdentifier = `${url} ${formId}`; // Identifier used to identify the form
-    //const saveButton = document.querySelector("#save"); // select save button
-    //const alertBox = document.querySelector(".alert"); // select alert display div
-    let form = document.querySelector(`#${formId}`); // select form
-
-
-
-    return data;
-
-}
-
-
-function populateTable(){
-
-}
 
 function imageData(fieldValue) {
     let attachment_faults = document.getElementById("attachment_faults");
