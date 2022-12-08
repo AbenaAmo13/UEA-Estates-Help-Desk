@@ -187,16 +187,14 @@
     <div class="tab_headers">
         <h1 id="tab2_title">My reports</h1>
         <select class="my-report-selector">
+            <option>All Tickets</option>
             <option>Open Tickets</option>
             <option>Closed Tickets</option>
         </select>
 
         <input type="text" placeholder="Search reports" class="search-bar">
-        <span id="reported-faults-records">
-        </span>
 
     </div>
-
 
     <div class="table_class">
         <table class="border large-space" id="reports-table-id">
@@ -247,6 +245,65 @@
             </tbody>
         </table>
     </div>
+
+
+    <span id="reported-faults-records">
+             <p class="mobile_records">4 records</p>
+                <nav role="navigation" aria-label="Pagination Navigation" id="pages-nav" class="mobile_records">
+                <ul>
+                    <span>Pages:</span>
+                    <li class="pages-link"><a href="/page-1" aria-label="Goto Page 1">1</a></li>
+                </ul>
+            </nav>
+            <button id="sorting_cards_button" class="mobile_records">
+                <span class="navbar-button-span">Sort button icon</span>
+                <img src="images/icons8-up-down-arrow-30.png" alt="sorting button">
+            </button>
+
+
+        </span>
+
+    <ul id="reported_list">
+        <li class="mobile_reported_list">
+            <a class="mobile_reported_links">
+                 <h3>Broken Elevator &nbsp</h3>
+                <h3>ID #1203 &nbsp</h3>
+                <p>Fault-type: Other &nbsp</p>
+                <p>Date Reported:17/11/2022 &nbsp</p>
+                <p class="report_status">Unassigned</p>
+            </a>
+        </li>
+        <li class="mobile_reported_list">
+            <a class="mobile_reported_links">
+                <h3>Oven &nbsp</h3> <br/>
+                <h3 id="heading_card">ID #1408 &nbsp</h3>
+                <p>Fault-type: Appliance &nbsp</p>
+                <p>Date Reported:17/11/2022 &nbsp</p>
+                <p class="report_status">Assigned</p>
+            </a>
+        </li>
+        <li class="mobile_reported_list">
+            <a class="mobile_reported_links">
+                <h3>Library Desk &nbsp</h3> <br/>
+                <h3>ID #1408 &nbsp</h3>
+                <p>Fault-type: Furniture &nbsp</p>
+                <p>Date Reported:10/11/2022 &nbsp</p>
+                <p class="report_status">Assigned</p>
+            </a>
+        </li>
+        <li class="mobile_reported_list">
+            <a class="mobile_reported_links">
+                <h3>Lab Computer Fault &nbsp</h3> <br/>
+                <h3>ID #1686 &nbsp</h3>
+                <p>Fault-type: Other &nbsp</p>
+                <p>Date Reported:10/11/2022 &nbsp</p>
+                <p class="report_status">Unassigned</p>
+            </a>
+        </li>
+    </ul>
+
+
+
 </div>
 <div class="tab_pages" id="tab3_page"></div>
 <div class="tab_pages" id="tab4_page">

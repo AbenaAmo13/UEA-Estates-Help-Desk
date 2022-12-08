@@ -214,32 +214,36 @@ function tableCardClick() {
 
 function imageData(fieldValue) {
     let attachment_faults = document.getElementById("attachment_faults");
-    if (attachment_faults.files[0]) {
-        const file = attachment_faults.files[0];
-        const fr = new FileReader();
-        fr.readAsDataURL(file);
-        fr.addEventListener('load', () => {
-            const url = fr.result
-            const fileName = url.toString();
-            console.log(fileName);
+    if(attachment_faults){
+        if (attachment_faults.files[0]) {
+            const file = attachment_faults.files[0];
+            const fr = new FileReader();
+            fr.readAsDataURL(file);
+            fr.addEventListener('load', () => {
+                const url = fr.result
+                const fileName = url.toString();
+                console.log(fileName);
 
-            let image_data = localStorage.setItem('image', url.toString());
-            /*
-            To get image from local storage: (Will use later)
-            const url = localStorage.getItem('image');
-            // Get data URL from localStorage
-                const img = new Image();
-                img.src = url;
-                document.body.appendChild(img);
-            // Set URL as src of image and append to DOM
-             */
-            //console.log(localStorage.getItem('image'));
-            return fileName;
+                let image_data = localStorage.setItem('image', url.toString());
+                /*
+                To get image from local storage: (Will use later)
+                const url = localStorage.getItem('image');
+                // Get data URL from localStorage
+                    const img = new Image();
+                    img.src = url;
+                    document.body.appendChild(img);
+                // Set URL as src of image and append to DOM
+                 */
+                //console.log(localStorage.getItem('image'));
+                return fileName;
 
-        });
+            });
 
+        }
     }
+
 }
+
 
 
 
@@ -248,9 +252,12 @@ function imageData(fieldValue) {
     if(isMobileWidth()){
         let report_table =  $('.table_class');
         report_table.empty();
+        $('.table_class').removeClass('table_class').addClass('fault-report-cards')
         $('.input_stylings').remove();
 
-
+        //$('.fault-report-cards').append(pagination)
+    }else{
+        let report_cards_list =  $('.table_class');
     }
  }
 

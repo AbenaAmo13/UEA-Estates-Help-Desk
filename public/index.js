@@ -124,63 +124,7 @@ function isMobileWidth() {
 }
 
 
-/*
-function returnMobileNavHeadingHTML(){
-    var mobileNavHeadings = "<div class=\"navbar-headings\">\n" +
-        "            <img  class=\"responsive logo\" src=\"images/uea_logo-removebg-preview.png\" alt=\"UEA logo\">\n" +
-        "            <h1 id=\"page-title\">Home</h1>\n" +
-        "            <button id=\"googletranslate\"  class=\"navbar-icon-buttons\">\n" +
-        "                <span class=\"navbar-button-span\">Google translate</span>\n" +
-        "                <i class=\"material-icons nav-bar\" alt=\"google translate icon\">g_translate</i>\n" +
-        "            </button>\n" +
-        "            <button id=\"menuButton\" aria-expanded=\"false\" aria-controls=\"menu\" class=\"navbar-icon-buttons\">\n" +
-        "                <span class=\"navbar-button-span\">Menu</span>\n" +
-        "                <i class=\"material-icons nav-bar\" alt=\"menu icon\">menu</i>\n" +
-        "            </button>\n" +
-        "        </div>\n" +
-        "\n" +
-        "        <ul class=\"menu\">\n" +
-        "            <li><a class=\"nav-bar-link\" id=\"tab1\"> Home</a></li>\n" +
-        "            <li><a class=\"nav-bar-link\" id=\"tab2\">My reports</a></li>\n" +
-        "            <li> <a class=\"nav-bar-link\" id=\"tab3\">Report fault </a></li>\n" +
-        "            <li><a class=\"nav-bar-link\" id=\"tab4\"> Help</a></li>\n" +
-        "            <li><a class=\"nav-bar-link\" id=\"tab5\"> Allocate Report</a></li>\n" +
-        "            <li  id=\"account-tab\">\n" +
-        "               <a class=\"nav-bar-link\" id=\"tab6\">\n" +
-        "                   <i class=\"material-icons nav-bar\" alt=\"account icon\">account_circle</i>\n" +
-        "                   <span>Account Management</span>\n                  " +
-        "               </a>\n" +
-        "            </li>\n" +
-        "        </ul>"
 
-    return mobileNavHeadings;
-}
-*/
-
-function returnLaptopNavHeadings(){
-    var laptopNavHeadings = "  <img  class=\"responsive logo\" src=\"images/uea_logo-removebg-preview.png\" alt=\"UEA logo\">\n" +
-        "            <h1 id=\"page-title\">Home</h1>\n" +
-        "        <ul class=\"menu\">\n" +
-        "            <li><a class=\"nav-bar-link\" id=\"tab1\"> Home</a></li>\n" +
-        "            <li><a class=\"nav-bar-link\" id=\"tab2\">My reports</a></li>\n" +
-        "            <li> <a class=\"nav-bar-link\" id=\"tab3\">Report Fault </a></li>\n" +
-        "            <li><a class=\"nav-bar-link\" id=\"tab4\"> Information</a></li>\n" +
-        "            <li><a class=\"nav-bar-link\" id=\"tab5\"> Allocate Report</a></li>\n" +
-        "            <li>\n" +
-        "                <a class=\"nav-bar-link\" id=\"tab6\">\n" +
-        "                <span class=\"navbar-button-span\">Account Management</span>\n" +
-        "                    <i class=\"material-icons nav-bar\" alt=\"google translate icon\">account_circle</i>\n" +
-        "                </a>\n" +
-        "            </li>\n" +
-        "             <li>\n" +
-        "                <a class=\"nav-bar-link\" id=\"tab7\">\n" +
-        "                    <span class=\"navbar-button-span\">Google Translate</span>\n" +
-        "                    <i class=\"material-icons nav-bar\" alt=\"google translate icon\">g_translate</i>\n" +
-        "                </a>\n" +
-        "            </li>"+
-        "        </ul>"
-    return laptopNavHeadings;
-}
 
 //var x = window.matchMedia("(max-width: 700px)")
 //appendMenu(x) // Call listener function at run time

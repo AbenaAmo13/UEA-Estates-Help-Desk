@@ -15,12 +15,20 @@ header{
 
 }
 
+
 #attachment_span{
     display:flex;
     flex-direction: row;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 
+}
+
+#reported-faults-records{
+    display: none;
+}
+#reported_list{
+    display: none;
 }
 #form-submit-modal{
     display: none; /* Hidden by default */
@@ -34,6 +42,15 @@ header{
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+#sorting_cards_button{
+background-color: transparent;
+    border: solid 1px;
+    border-radius: 10%;
+
+
+
 }
 
 #submit-modal-content{
@@ -451,8 +468,6 @@ label{
     background: url("images/search-icon.png") no-repeat left;
     background-size: 20px;
     border: solid 1px;
-
-
 }
 
 .pages-link{
@@ -467,19 +482,50 @@ label{
         width: 92%;
     }
     .search-bar{
-        width: 135%;;
+        width: 92%;
     }
     #pages-nav{
         all: initial;
+
     }
+
+    #reported_list{
+        padding: 0;
+    }
+    .mobile_reported_list{
+
+        width: 100%;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+    .mobile_reported_links{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 5%;
+        cursor:pointer;
+    }
+    #heading_card{
+        padding-right: 100px;
+    }
+    .report_status{
+        border: solid 1px;
+        border-radius: 3px;
+        margin-left: 250px;
+    }
+
     #reported-faults-records{
         display: flex;
+        flex-direction: row;
+        align-items:center;
+        justify-content: space-evenly;
+
     }
+
 
     .my-report-selector{
         display: block;
         margin-bottom: 10%;
-        width: 150%;
+        width: 100%;
     }
 
     #user-account-name{
@@ -726,8 +772,13 @@ label{
     #attachment_span{
         display:flex;
         flex-direction: row;
-        justify-content: space-evenly;
+        justify-content: center;
+        align-items: center;
 
+    }
+
+    #reported_list{
+        display: block;
     }
 
 
