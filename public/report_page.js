@@ -248,17 +248,18 @@ function imageData(fieldValue) {
 
 
 
- function reportMobileView(){
-    if(isMobileWidth()){
-        let report_table =  $('.table_class');
-        report_table.empty();
-        $('.table_class').removeClass('table_class').addClass('fault-report-cards')
-        $('.input_stylings').remove();
+ function reportMobileView() {
+     if (isMobileWidth()) {
+         let report_table = $('.table_class');
+         /*  report_table.empty();
+           $('.table_class').removeClass('table_class').addClass('fault-report-cards')
+           $('.input_stylings').remove();
 
-        //$('.fault-report-cards').append(pagination)
-    }else{
-        let report_cards_list =  $('.table_class');
-    }
+           //$('.fault-report-cards').append(pagination)
+       }else{
+           let report_cards_list =  $('.table_class');
+       }*/
+     }
  }
 
 
