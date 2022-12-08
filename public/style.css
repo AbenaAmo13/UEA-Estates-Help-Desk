@@ -405,6 +405,7 @@ li{
 
 
 
+
 /*th {
     padding-top: 12px;
     padding-bottom: 12px;
@@ -507,8 +508,11 @@ label{
         margin: 5%;
         cursor:pointer;
     }
-    #heading_card{
+    .space_items{
         padding-right: 100px;
+    }
+    .space_items_mini{
+        padding-right: 15px;
     }
     .report_status{
         border: solid 1px;

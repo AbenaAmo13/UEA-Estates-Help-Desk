@@ -1,17 +1,23 @@
 
 function ReportFaultDisplay(){
     //Form handling:
-
+    getRandomDateMobile()
 
     const getReports = JSON.parse(localStorage.getItem("reports"));
     console.log(getReports);
     if(getReports){
         getReports.forEach((report) => {
         //Append relevant report information the my reports table:
-            let title_report = report[0];
-            let fault_type = report[5];
-            console.log(title_report)
-      RenderMyReportsPage(title_report, fault_type);
+            let reportID = report[0]
+            let title_report = report[1];
+            let fault_type = report[6];
+            let date_reported = report[7]
+            let expected_resolve_date = report[8]
+            let report_status = report[9]
+            console.log(report_status)
+            //console.log(title_report)
+      RenderMyReportsPage(reportID, title_report, fault_type,report_status, date_reported, expected_resolve_date );
+            RenderMyReportsMobileVersion(reportID,title_report, fault_type, date_reported, report_status);
         });
     }
 
@@ -23,6 +29,9 @@ function ReportFaultDisplay(){
         : [];
     report_form.addEventListener("submit", (e) => {
         e.preventDefault();
+        //Give report an ID
+        let randomID = Math.floor((Math.random() * 2000) + 1000);
+        reportArray.push(randomID);
         for(let i= 0; i<document.report_form.elements.length; i++){
             let fieldName = document.report_form.elements[i].name;
             let fieldValue = document.report_form.elements[i].value;
@@ -35,7 +44,20 @@ function ReportFaultDisplay(){
                 reportArray.push(fieldValue)
             }
         }
-        report.push(reportArray)
+        if(isMobileWidth()){
+            let dateItems = getRandomDateMobile();
+            reportArray.push(dateItems[0])
+            reportArray.push(dateItems[1])
+
+        }else{
+            let dateItems = getRandomDate();
+            reportArray.push(dateItems[0]);
+            reportArray.push(dateItems[1]);
+        }
+
+        reportArray.push("Unassigned");
+        report.push(reportArray);
+        console.log(report)
         localStorage.setItem("reports", JSON.stringify(report));
         document.getElementById("form-submit-modal").style.display="block";
     });
@@ -118,56 +140,110 @@ function saveFormData(){
     }
 
 
+    function getRandomDateMobile(){
+        let dateItems = []
+        let date = new Date()
+        let Months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+        let DaysOfTheMonth = ['Offset', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']
+        let daysOfTheMonthsID = Math.floor(Math.random() * 31) + 1;
+        let monthsID = Math.floor(Math.random() * 12);
+        let resolveDate = DaysOfTheMonth[daysOfTheMonthsID] + "/" + Months[monthsID] + "/" + "2023";
+        let currentDate = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+        dateItems = [currentDate, resolveDate];
+        return dateItems
+    }
+function RenderMyReportsMobileVersion(report_ID, title_of_report, type_of_fault, date_reported, status){
+    console.log(status)
+    console.log("here");
+    let reportList = document.createElement('li');
+    reportList.classList.add("mobile_reported_list");
+    let reportLink = document.createElement('a');
+    reportLink.classList.add("mobile_reported_links");
+    let report_title = document.createElement('h3');
+    report_title.textContent = title_of_report + " ";
+    console.log(title_of_report.length)
+    if(title_of_report.length > 20){
+        //Increasing spaceItems
+        report_title.classList.add("space_items_mini");
+    }
+    let reportId = document.createElement('h3');
+    reportId.textContent = "ID"+" #" + report_ID;
+    let fault_type = document.createElement('p');
+    fault_type.textContent = "Fault type: "+type_of_fault + " ";
+    let reported_date = document.createElement("p");
+    reported_date.textContent = "Date reported: "+ date_reported;
+    let assignment_status = document.createElement("p");
+    assignment_status.classList.add("report_status");
+    assignment_status.textContent = status;
+    console.log(assignment_status)
+    let reported_link_items = [report_title, reportId, fault_type, reported_date, assignment_status];
+    //Append to the a tab.
+    for(let i = 0; i < reported_link_items.length; i++){
+        reportLink.append(reported_link_items[i]);
+        console.log(reportLink)
+    }
+    //Append the a to the list;
+    reportList.appendChild(reportLink);
+    //console.log(reportLink)
+    //Append the list to the entire ul
+    let entireList = document.getElementById("reported_list");
+    if(reportList){
+        entireList.appendChild(reportList);
+    }
+}
 
 
 
-
-
-
-function RenderMyReportsPage(title_of_report, type_of_fault) {
-    //Set arrays for items for the table
-    let assignedStatus = ['Assigned', 'Unassigned']
-    let Months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-    let DaysOfTheMonth = ['Offset', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '9th', '10th', '11th', '12th', '13th', '14th', '15th', '16th', '17th', '18th', '19th', '20th', '21st', '22nd', '23rd', '24th', '25th', '26th', '27th', '28th', '29th', '30th', '31st']
-    //Save local storage data.
-    saveFormData();
-
-    let assignedStatusID = Math.floor((Math.random() * 2));
+function getRandomDate() {
+    let date_items = [];
     let monthsID = Math.floor(Math.random() * 12);
     let daysOfTheMonthsID = Math.floor(Math.random() * 31) + 1;
-    let row = document.createElement('tr');
-    //Add id column
-    let randomID = Math.floor((Math.random() * 2000) + 1000);
-    let ID_column = document.createElement('td');
-    ID_column.textContent = "#" + randomID;
-    let reportTitle = document.createElement('td');
-    reportTitle.textContent = title_of_report;
-    console.log(reportTitle);
-    let fault_type = document.createElement('td');
-    fault_type.textContent = type_of_fault;
-    let status_column = document.createElement('td');
-    status_column.textContent = assignedStatus[assignedStatusID]
+    let Months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    let DaysOfTheMonth = ['Offset', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '9th', '10th', '11th', '12th', '13th', '14th', '15th', '16th', '17th', '18th', '19th', '20th', '21st', '22nd', '23rd', '24th', '25th', '26th', '27th', '28th', '29th', '30th', '31st']
+    let randomDate = DaysOfTheMonth[daysOfTheMonthsID] + " " + Months[monthsID] + " " + "2023";
     let date = new Date();
     let currentMonth = Months[date.getMonth()];
     let currentDay = DaysOfTheMonth[date.getDate()];
     let fullCurrentDate = currentDay + " " + currentMonth + " " + "2022"
-    let currentDateColumn = document.createElement('td');
-    currentDateColumn.textContent = fullCurrentDate
-    let randomDate = DaysOfTheMonth[daysOfTheMonthsID] + " " + Months[monthsID] + " " + "2022";
-    let randomDateColumn = document.createElement("td");
-    randomDateColumn.textContent = randomDate;
-    let column_elements = [ID_column, reportTitle, fault_type, status_column, currentDateColumn, randomDateColumn]
+    date_items = [fullCurrentDate, randomDate]
+    return date_items;
+}
 
+function getTodayDate(){
+
+
+
+
+
+}
+
+
+function RenderMyReportsPage(report_id,title_of_report, type_of_fault, report_status, date_reported, expected_resolve_date) {
+    //Set arrays for items for the table
+    let row = document.createElement('tr');
+    //Add id column
+    let ID_column = document.createElement('td');
+    ID_column.textContent = "#" + report_id;
+    let reportTitle = document.createElement('td');
+    reportTitle.textContent = title_of_report;
+    let fault_type = document.createElement('td');
+    fault_type.textContent = type_of_fault;
+    let status_column = document.createElement('td');
+    status_column.textContent = report_status
+    let currentDateColumn = document.createElement('td');
+    currentDateColumn.textContent = date_reported
+    let randomDateColumn = document.createElement("td");
+    randomDateColumn.textContent = expected_resolve_date;
+    let column_elements = [ID_column, reportTitle, fault_type, status_column, currentDateColumn, randomDateColumn]
     //Append column information to the row
     for (let i = 0; i < 6; i++) {
         console.log(column_elements[i]);
         row.appendChild(column_elements[i]);
     }
-
     let table_body = document.getElementById("reports_table_id_body");
     table_body.appendChild(row);
 
-
+}
 /*
         var navLinks = $('.nav-bar-link')
         //Saved tab2 html table at the start
@@ -175,13 +251,11 @@ function RenderMyReportsPage(title_of_report, type_of_fault) {
         $('#tab2_page').show()
         navLinks.removeClass('active_tab')
        $('#tab2').addClass('active_tab')*/
-}
 
 
 
-function renderCardsForMobile(){
 
-}
+function renderCardsForMobile(){}
 function closedModal() {
     let closed_button = document.getElementsByClassName("close")[0];
     let modal = document.getElementById("form-submit-modal");
