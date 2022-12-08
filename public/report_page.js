@@ -176,6 +176,12 @@ function RenderMyReportsPage(title_of_report, type_of_fault) {
         navLinks.removeClass('active_tab')
        $('#tab2').addClass('active_tab')*/
 }
+
+
+
+function renderCardsForMobile(){
+
+}
 function closedModal() {
     let closed_button = document.getElementsByClassName("close")[0];
     let modal = document.getElementById("form-submit-modal");
