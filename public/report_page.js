@@ -1,29 +1,47 @@
+function ReportFaultDisplay() {
+    let tabIdMobile;
 
-function ReportFaultDisplay(){
-    //Form handling:
+    $('.sideNavLinks').click(function () {
+        let t = $(this).attr('id');
+        let tabId = t.split('_')[0];
+        tabIdMobile = tabId;
+        switch(tabIdMobile){
+            case "tab3":
+                let expanded = false;
+                expandMore(expanded);
+                break;
+
+        }
+
+    });
+
+
+
+    //Form handling
     getRandomDateMobile()
 
-    const getReports = JSON.parse(localStorage.getItem("reports"));
+
+    let getReports = JSON.parse(localStorage.getItem("reports"));
     console.log(getReports);
-    if(getReports){
+    if (getReports) {
         getReports.forEach((report) => {
-        //Append relevant report information the my reports table:
-            let reportID = report[0]
+            //Append relevant report information the my reports table:
+            let reportID = report[0];
             let title_report = report[1];
             let fault_type = report[6];
-            let date_reported = report[7]
-            let expected_resolve_date = report[8]
-            let report_status = report[9]
+            let date_reported = report[9]
+            let expected_resolve_date = report[10]
+            let report_status = report[11]
             console.log(report_status)
             //console.log(title_report)
-      RenderMyReportsPage(reportID, title_report, fault_type,report_status, date_reported, expected_resolve_date );
-            RenderMyReportsMobileVersion(reportID,title_report, fault_type, date_reported, report_status);
+            RenderMyReportsPage(reportID, title_report, fault_type, report_status, date_reported, expected_resolve_date);
+            RenderMyReportsMobileVersion(reportID, title_report, fault_type, date_reported, report_status);
         });
     }
 
     let report_form = document.getElementById("reports_form");
     let fileName = imageData();
-    let reportArray=[]
+    let reportArray = []
     let report = localStorage.getItem("reports")
         ? JSON.parse(localStorage.getItem("reports"))
         : [];
@@ -32,41 +50,31 @@ function ReportFaultDisplay(){
         //Give report an ID
         let randomID = Math.floor((Math.random() * 2000) + 1000);
         reportArray.push(randomID);
-        for(let i= 0; i<document.report_form.elements.length; i++){
+        for (let i = 0; i < document.report_form.elements.length; i++) {
             let fieldName = document.report_form.elements[i].name;
             let fieldValue = document.report_form.elements[i].value;
-            if((fieldName==="attachment_faults") && (fieldValue)){
+            if ((fieldName === "attachment_faults") && (fieldValue)) {
                 fileName = uploadImageTextChanger(fieldValue);
-                console.log(fileName)
-;                //reportItems.push(fileName)
-
-            }else if(fieldValue){
-                reportArray.push(fieldValue)
+                //console.log(fileName)
+                                //reportItems.push(fileName)
             }
+            reportArray.push(fieldValue)
         }
-        if(isMobileWidth()){
-            let dateItems = getRandomDateMobile();
-            reportArray.push(dateItems[0])
-            reportArray.push(dateItems[1])
-
-        }else{
-            let dateItems = getRandomDate();
-            reportArray.push(dateItems[0]);
-            reportArray.push(dateItems[1]);
-        }
-
+        let dateItems = getRandomDate();
+        reportArray.push(dateItems[0]);
+        reportArray.push(dateItems[1]);
         reportArray.push("Unassigned");
         report.push(reportArray);
         console.log(report)
         localStorage.setItem("reports", JSON.stringify(report));
-        document.getElementById("form-submit-modal").style.display="block";
+        document.getElementById("form-submit-modal").style.display = "block";
     });
 
-    $(".close").click(function (){
-        document.getElementById("form-submit-modal").style.display="none";
+    $(".close").click(function () {
+        document.getElementById("form-submit-modal").style.display = "none";
     })
 
-    let savedTable =  $("table").html();
+    let savedTable = $("table").html();
     let report_submits_arrays = [];
     //All the functions for the report page
     //nav_bar_display_change();
@@ -75,33 +83,35 @@ function ReportFaultDisplay(){
     tableCardClick();
     reportMobileView();
     uploadImageTextChanger();
-        //getData();
-   /*const form = document.querySelector('form');
-    form.addEventListener('submit', handleSubmit);*/
+
+    //getData();
+    /*const form = document.querySelector('form');
+     form.addEventListener('submit', handleSubmit);*/
 
 
 }
 
 
-function renderTableVersion2(reportItems){
+function renderTableVersion2(reportItems) {
 
 }
 
-function closeForm(){
+function closeForm() {
 
 }
 
-let ReportFormData=[];
+let ReportFormData = [];
+
 /*This function */
-function uploadImageTextChanger(){
- const fileInput = document.getElementById("attachment_faults");
-    fileInput.addEventListener('change' , () => {
+function uploadImageTextChanger() {
+    const fileInput = document.getElementById("attachment_faults");
+    fileInput.addEventListener('change', () => {
         const fileName = fileInput.files[0].name;
-        document.getElementById("file_name_id").textContent = " "+ fileName;
+        document.getElementById("file_name_id").textContent = " " + fileName;
     })
 }
 
-function nav_bar_display_change(){
+function nav_bar_display_change() {
     //Remove the current title
     $('#tab1').text("Home");
     $('#tab2').text("My reports");
@@ -109,11 +119,10 @@ function nav_bar_display_change(){
 }
 
 
-
-function saveFormData(){
-    let attachment_faults =  document.getElementById("attachment_faults");
+function saveFormData() {
+    let attachment_faults = document.getElementById("attachment_faults");
     // Saves image to localStorage
-    if(attachment_faults.files[0]){
+    if (attachment_faults.files[0]) {
         const file = attachment_faults.files[0];
         const fr = new FileReader();
         fr.readAsDataURL(file);
@@ -123,36 +132,37 @@ function saveFormData(){
         })
     }
 
-/*
-            //To get image from local storage: (Will use later)
-            const url = localStorage.getItem('image');
-            // Get data URL from localStorage
-                const img = new Image();
-                img.src = url;
-                document.body.appendChild(img);
-            // Set URL as src of image and append to DOM
+    /*
+                //To get image from local storage: (Will use later)
+                const url = localStorage.getItem('image');
+                // Get data URL from localStorage
+                    const img = new Image();
+                    img.src = url;
+                    document.body.appendChild(img);
+                // Set URL as src of image and append to DOM
 
-            //console.log(localStorage.getItem('image'));
+                //console.log(localStorage.getItem('image'));
 
-        });
+            });
 
- */
-    }
+     */
+}
 
 
-    function getRandomDateMobile(){
-        let dateItems = []
-        let date = new Date()
-        let Months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
-        let DaysOfTheMonth = ['Offset', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']
-        let daysOfTheMonthsID = Math.floor(Math.random() * 31) + 1;
-        let monthsID = Math.floor(Math.random() * 12);
-        let resolveDate = DaysOfTheMonth[daysOfTheMonthsID] + "/" + Months[monthsID] + "/" + "2023";
-        let currentDate = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
-        dateItems = [currentDate, resolveDate];
-        return dateItems
-    }
-function RenderMyReportsMobileVersion(report_ID, title_of_report, type_of_fault, date_reported, status){
+function getRandomDateMobile() {
+    let dateItems = []
+    let date = new Date()
+    let Months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+    let DaysOfTheMonth = ['Offset', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']
+    let daysOfTheMonthsID = Math.floor(Math.random() * 31) + 1;
+    let monthsID = Math.floor(Math.random() * 12);
+    let resolveDate = DaysOfTheMonth[daysOfTheMonthsID] + "/" + Months[monthsID] + "/" + "2023";
+    let currentDate = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+    dateItems = [currentDate, resolveDate];
+    return dateItems
+}
+
+function RenderMyReportsMobileVersion(report_ID, title_of_report, type_of_fault, date_reported, status) {
     console.log(status)
     console.log("here");
     let reportList = document.createElement('li');
@@ -162,23 +172,23 @@ function RenderMyReportsMobileVersion(report_ID, title_of_report, type_of_fault,
     let report_title = document.createElement('h3');
     report_title.textContent = title_of_report + " ";
     console.log(title_of_report.length)
-    if(title_of_report.length > 20){
+    if (title_of_report.length > 20) {
         //Increasing spaceItems
         report_title.classList.add("space_items_mini");
     }
     let reportId = document.createElement('h3');
-    reportId.textContent = "ID"+" #" + report_ID;
+    reportId.textContent = "ID-" + report_ID;
     let fault_type = document.createElement('p');
-    fault_type.textContent = "Fault type: "+type_of_fault + " ";
+    fault_type.textContent = "Fault type: " + type_of_fault + " ";
     let reported_date = document.createElement("p");
-    reported_date.textContent = "Date reported: "+ date_reported;
+    reported_date.textContent = "Date reported: " + date_reported;
     let assignment_status = document.createElement("p");
     assignment_status.classList.add("report_status");
     assignment_status.textContent = status;
     console.log(assignment_status)
     let reported_link_items = [report_title, reportId, fault_type, reported_date, assignment_status];
     //Append to the a tab.
-    for(let i = 0; i < reported_link_items.length; i++){
+    for (let i = 0; i < reported_link_items.length; i++) {
         reportLink.append(reported_link_items[i]);
         console.log(reportLink)
     }
@@ -187,11 +197,10 @@ function RenderMyReportsMobileVersion(report_ID, title_of_report, type_of_fault,
     //console.log(reportLink)
     //Append the list to the entire ul
     let entireList = document.getElementById("reported_list");
-    if(reportList){
+    if (reportList) {
         entireList.appendChild(reportList);
     }
 }
-
 
 
 function getRandomDate() {
@@ -209,21 +218,18 @@ function getRandomDate() {
     return date_items;
 }
 
-function getTodayDate(){
-
-
-
+function getTodayDate() {
 
 
 }
 
 
-function RenderMyReportsPage(report_id,title_of_report, type_of_fault, report_status, date_reported, expected_resolve_date) {
+function RenderMyReportsPage(report_id, title_of_report, type_of_fault, report_status, date_reported, expected_resolve_date) {
     //Set arrays for items for the table
     let row = document.createElement('tr');
     //Add id column
     let ID_column = document.createElement('td');
-    ID_column.textContent = "#" + report_id;
+    ID_column.textContent = report_id;
     let reportTitle = document.createElement('td');
     reportTitle.textContent = title_of_report;
     let fault_type = document.createElement('td');
@@ -244,6 +250,64 @@ function RenderMyReportsPage(report_id,title_of_report, type_of_fault, report_st
     table_body.appendChild(row);
 
 }
+
+
+function expandMore(expanded) {
+
+    $('.expand_buttons').click(function () {
+        let t = $(this).attr('id');
+        let progress_details = '#'+t + '_info';
+        console.log(progress_details);
+        let icon_name = "#"+t + "_expand"
+        if(!expanded){
+            $(progress_details).removeClass("hide_details");
+            $(progress_details).addClass("drop_down_progress");
+            $(icon_name).textContent = "expand_less"
+            expanded = true;
+        }else{
+            $(progress_details).removeClass("drop_down_progress");
+            $(progress_details).addClass("hide_details");
+            $(icon_name).textContent = "expand_more"
+            expanded = false;
+
+        }
+
+    })
+
+
+
+
+/*
+    let expand_class = document.getElementsByClassName("expand_buttons").id;
+    //let expand_more_button = document.getElementById("id_1203_expand_more");
+    let expand_div_name_id = expand_class + "_progress_details";
+    let icon = expand_class + "_expand_more_icon"
+    let progress_detail = document.getElementById(expand_div_name_id);
+    expand_class.addEventListener("click", (e) => {
+        if (!expanded) {
+            alert("something is clicked");
+            //Expand the card
+            //let progress_detail = document.getElementById("id_1203_progress_details");
+            progress_detail.classList.remove("hide_details");
+            progress_detail.classList.add("drop_down_progress");
+
+            let expand_more_icon = document.getElementById(icon).innerText = "expand_less"
+            expanded = true
+        } else {
+            alert("something is clicked again");
+            //Make the card small
+            //let progress_detail = document.getElementById("id_1203_progress_details");
+            progress_detail.classList.remove("drop_down_progress");
+            progress_detail.classList.add("hide_details");
+            let expand_more_icon = document.getElementById(icon).innerText = "expand_more"
+            expanded = false;
+
+        }
+    })
+*/
+
+}
+
 /*
         var navLinks = $('.nav-bar-link')
         //Saved tab2 html table at the start
@@ -253,9 +317,9 @@ function RenderMyReportsPage(report_id,title_of_report, type_of_fault, report_st
        $('#tab2').addClass('active_tab')*/
 
 
+function renderCardsForMobile() {
+}
 
-
-function renderCardsForMobile(){}
 function closedModal() {
     let closed_button = document.getElementsByClassName("close")[0];
     let modal = document.getElementById("form-submit-modal");
@@ -270,6 +334,7 @@ function closedModal() {
         }
     }
 }
+
 function tableCardClick() {
     $("tr").click(function () {
         let inSideReport = true;
@@ -286,15 +351,13 @@ function tableCardClick() {
 }
 
 
-
 //Initialize the get request from the client side.
 //Whenever the user loads the page, you have to make the request.
 
 
-
 function imageData(fieldValue) {
     let attachment_faults = document.getElementById("attachment_faults");
-    if(attachment_faults){
+    if (attachment_faults) {
         if (attachment_faults.files[0]) {
             const file = attachment_faults.files[0];
             const fr = new FileReader();
@@ -325,28 +388,24 @@ function imageData(fieldValue) {
 }
 
 
+function reportMobileView() {
+    if (isMobileWidth()) {
+        let report_table = $('.table_class');
+        /*  report_table.empty();
+          $('.table_class').removeClass('table_class').addClass('fault-report-cards')
+          $('.input_stylings').remove();
+
+          //$('.fault-report-cards').append(pagination)
+      }else{
+          let report_cards_list =  $('.table_class');
+      }*/
+    }
+}
 
 
-
- function reportMobileView() {
-     if (isMobileWidth()) {
-         let report_table = $('.table_class');
-         /*  report_table.empty();
-           $('.table_class').removeClass('table_class').addClass('fault-report-cards')
-           $('.input_stylings').remove();
-
-           //$('.fault-report-cards').append(pagination)
-       }else{
-           let report_cards_list =  $('.table_class');
-       }*/
-     }
- }
-
-
-
-function isMobileWidth(){
+function isMobileWidth() {
     console.log($('#mobile-indicator').is(':visible'))
     return $('#mobile-indicator').is(':visible')
- }
+}
 
 

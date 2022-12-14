@@ -1,3 +1,7 @@
+*{
+    font-family: Arial;
+}
+
 body{
     margin: 0;
 }
@@ -164,7 +168,7 @@ input{
 }
 
 #report_h2{
-    text-align: center;
+    text-indent: -7em;
 }
 
 .card-list>.card-list-item:hover {
@@ -477,13 +481,45 @@ label{
 .pages-link{
     display: inline-block;
 }
+#progress_headers{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.cover_icon_text{
+    display: none;
+}
+
+#progress_note_icons{
+    display: flex;
+    justify-content:end;
+}
+
+.progress_buttons{
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: solid 1px;
+    border-radius: 5%;
+}
+
 
 /*Media query for the phones with the width less than 700 px width*/
 @media screen and (max-width: 700px) {
+
+
+    #report_h2{
+        text-indent: -7em;
+    }
+
     .report-information{
         box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
         display: flex;
         width: 92%;
+    }
+    report_item_information{
+        /*display: none;*/
     }
     .search-bar{
         width: 92%;
@@ -508,6 +544,22 @@ label{
         margin: 5%;
         cursor:pointer;
     }
+
+    #details_corner{
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+    #progress_cards_info{
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+    #progress_headers{
+        padding-bottom: 4%;
+        border-bottom: solid 1px;
+    }
+    #detailed_corner_inner{
+        margin: 5%;
+    }
     .space_items{
         padding-right: 100px;
     }
@@ -526,6 +578,23 @@ label{
         align-items:center;
         justify-content: space-evenly;
 
+    }
+    #priority_identification{
+        display: flex;
+        align-items: center;
+    }
+    .priority_icons{
+        color: orange;
+    }
+
+    .indentMe{
+        text-indent: 0.5em;
+    }
+    #status_span{
+        display: flex;
+    }
+    #status_title{
+     padding-right:5px
     }
 
 
@@ -789,6 +858,91 @@ label{
     }
     .table_class{
         display: none;
+    }
+
+    .report_list_headers{
+        display: flex;
+        flex-direction: row;
+        /*justify-content: spaceevenly;*/
+    }
+
+    #progress_bar_main{
+        background-color: lightgrey;
+        width: 100%;
+    }
+
+    #progress_cards_info{
+        margin-top: 10%;
+    }
+
+    #progress_headers_icons{
+        display: flex;
+        margin-left: 25%;
+    }
+    #progress_heading_text{
+        text-indent: 1em;
+    }
+
+    .progress_info{
+        display: flex;
+        align-items: center;
+       margin-left: 3%;
+    }
+    .progress_info_date{
+        margin-left: 22%;
+    }
+    .progress_info_state{
+        border: solid 1px;
+        border-radius: 3px;
+        width: 20%;
+        margin-left: 10%;
+        display: inline;
+
+    }
+
+    .drop_down_progress{
+        display: block;
+        transition: all 0.2s ease;
+    }
+
+    .progress_note_item{
+        border-bottom: solid 1px;
+    }
+    .progress_align{
+        margin-left: 9%;
+    }
+    .progress_expand_icon{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+
+    .hide_details{
+        display: none;
+    }
+
+    .expand_buttons{
+        border:none;
+        background-color: transparent;
+    }
+
+    .expand_icons{
+        border:solid 1px;
+        border-radius: 50%;
+    }
+    .progress_title{
+        margin-left: 9%;
+
+    }
+
+    #sorting_button{
+        margin-left: 7%;
+    }
+
+
+    #progress_bar_secondary{
+        width: 50%;
+        background-color: pink;
     }
 
 

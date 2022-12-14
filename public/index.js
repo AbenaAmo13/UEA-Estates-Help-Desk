@@ -11,11 +11,11 @@ $(document).ready(function() {
     });
 
 
-
+   tabMobileToggles();
     ReportFaultDisplay();
     openSideNavigation();
     closeSideNav();
-    tabMobileToggles();
+
 
 });
 
@@ -50,8 +50,8 @@ function tabMobileToggles(){
     $('.tab_pages:first').show();
 
     $('.sideNavLinks').click(function(){
-        var t = $(this).attr('id');
-        var tabId = t.split('_')[0];
+        let t = $(this).attr('id');
+        let tabId = t.split('_')[0];
         console.log(tabId);
         if(!$(this).hasClass('active_tab') &&(t!=="close_sidenav_button")){ //this is the start of our condition
             $('.sideNavLinks').removeClass('active_tab');
@@ -61,6 +61,7 @@ function tabMobileToggles(){
             $('#'+ tabId+ '_page').show();
         }
     });
+
 }
 //Function to control toggle of side navigation bar
 function openSideNavigation(){

@@ -44,23 +44,23 @@
         <ul class="menu">
             <li><a class="nav-bar-link" id="tab1"> Report Fault</a></li>
             <li><a class="nav-bar-link" id="tab2">My reports</a></li>
-            <li><a class="nav-bar-link" id="tab4"> Help</a></li>
-            <li><a class="nav-bar-link" id="tab5"> Allocator's View</a></li>
-            <li><a class="nav-bar-link" id="tab6"> Technician's View</a></li>
+            <li><a class="nav-bar-link" id="tab3"> More information</a></li>
+            <li><a class="nav-bar-link" id="tab4"> Allocator's View</a></li>
+            <li><a class="nav-bar-link" id="tab5"> Technician's View</a></li>
             <li>
-                <a class="nav-bar-link" id="tab7">
+                <a class="nav-bar-link" id="tab6">
                 <span class="navbar-button-span">Account Management</span>
                     <i class="material-icons nav-bar" alt="account circle icon">account_circle</i>
                 </a>
             </li>
             <li>
-                <a class="nav-bar-link" id="tab8">
+                <a class="nav-bar-link" id="tab7">
                     <span class="navbar-button-span">Accessibility Options</span>
                     <i class="material-icons nav-bar" alt="accessibility icon">accessibility</i>
                 </a>
             </li>
             <li>
-                <a class="nav-bar-link" id="tab9">
+                <a class="nav-bar-link" id="tab8">
                     <span class="navbar-button-span">Help Options</span>
                     <i class="material-icons nav-bar" alt="help icon">help</i>
                 </a>
@@ -195,7 +195,7 @@
         <input type="text" placeholder="Search reports" class="search-bar">
 
     </div>
-
+    <!--Table view of report-->
     <div class="table_class">
         <table class="border large-space" id="reports-table-id">
             <caption>My reports table</caption>
@@ -211,7 +211,7 @@
             </thead>
             <tbody id="reports_table_id_body">
             <tr>
-                <td class="report_id">#1203</td>
+                <td class="report_id">1203</td>
                 <td class="report_title">Broken elevator</td>
                 <td class="category_type">Other</td>
                 <td class="status">Unassigned</td>
@@ -219,7 +219,7 @@
                 <td class="expected_date">29th December 2022</td>
             </tr>
             <tr>
-                <td class="report_id">#1408</td>
+                <td class="report_id">1408</td>
                 <td>Oven</td>
                 <td>Appliance</td>
                 <td>Assigned</td>
@@ -227,26 +227,26 @@
                 <td>3rd January 2022</td>
             </tr>
             <tr>
-                <td>#1504</td>
-                <td>Library Desk</td>
+                <td>1504</td>
+                <td>Broken Door</td>
                 <td>Furniture</td>
                 <td>Assigned</td>
                 <td>10th November 2022</td>
-                <td>2nd December 2022</td>
+                <td>16tn December 2022</td>
             </tr>
             <tr>
-                <td>#1686</td>
-                <td>Lab Computer Fault</td>
+                <td>1686</td>
+                <td>Broken Shower Head</td>
                 <td>Other</td>
                 <td>Unassigned</td>
                 <td>8th November 2022</td>
-                <td>9th December 2022</td>
+                <td>20th December 2022</td>
             </tr>
             </tbody>
         </table>
     </div>
 
-
+    <!--Mobile view heading-->
     <span id="reported-faults-records">
              <p class="mobile_records">4 records</p>
                 <nav role="navigation" aria-label="Pagination Navigation" id="pages-nav" class="mobile_records">
@@ -262,50 +262,142 @@
 
 
         </span>
-
+    <!--Mobile view report list-->
     <ul id="reported_list">
         <li class="mobile_reported_list">
             <a class="mobile_reported_links">
-                 <h3>Broken Elevator &nbsp</h3>
-                <h3>ID #1203 &nbsp</h3>
-                <p>Fault type: Other &nbsp</p>
-                <p>Date Reported:17/11/2022 &nbsp</p>
+                 <h3>Broken Elevator </h3>
+                <h3 class="indentMe space_items">ID-1203</h3>
+                <p>Fault type: Other </p>
+                <p>Date Reported: 17th November 2022 </p>
                 <p class="report_status">Unassigned</p>
             </a>
         </li>
         <li class="mobile_reported_list">
             <a class="mobile_reported_links">
-                <h3>Oven &nbsp</h3> <br/>
-                <h3 class="space_items">ID #1408 &nbsp</h3>
-                <p>Fault type: Appliance &nbsp</p>
-                <p>Date Reported:17/11/2022 &nbsp</p>
+                <h3>Oven </h3> <br/>
+                <h3 class="indentMe space_items">ID-1408</h3>
+                <p>Fault type: Appliance</p>
+                <p>Date Reported: 3rd December 2022 </p>
                 <p class="report_status">Assigned</p>
             </a>
         </li>
         <li class="mobile_reported_list">
             <a class="mobile_reported_links">
-                <h3>Library Desk &nbsp</h3> <br/>
-                <h3 class="space_items">ID #1408 &nbsp</h3>
+                <h3>Broken Door</h3> <br/>
+                <h3 class="space_items indentMe">ID-1408 </h3>
                 <p>Fault type: Furniture &nbsp</p>
-                <p>Date Reported:10/11/2022 &nbsp</p>
+                <p>Date Reported: 10th November 2022 &nbsp</p>
                 <p class="report_status">Assigned</p>
             </a>
         </li>
         <li class="mobile_reported_list">
             <a class="mobile_reported_links">
-                <h3>Lab Computer Fault &nbsp</h3> <br/>
-                <h3>ID #1686 &nbsp</h3>
-                <p>Fault type: Other &nbsp</p>
-                <p>Date Reported:10/11/2022 &nbsp</p>
+                <h3>Broken Shower Head</h3> <br/>
+                <h3 class="indentMe">ID-1686</h3>
+                <p>Fault type: Other</p>
+                <p>Date Reported: 8th November 2022</p>
                 <p class="report_status">Unassigned</p>
             </a>
         </li>
     </ul>
-
+    <!--Mobile view specific item-->
 
 
 </div>
-<div class="tab_pages" id="tab3_page"></div>
+<div class="tab_pages" id="tab3_page">
+    <div id="report_item_information">
+
+            <span class="report_list_headers">
+             <h2 id="report_list_id" class="space_items_mini">ID-1203</h2>
+            <h2 id="report_list_title">Broken elevator</h2>
+        </span>
+            <h3>Status</h3>
+            <div id="progress_bar_main" aria-label="progress bar">
+                <div id="progress_bar_secondary" ><p>Assigned</p></div>
+            </div>
+            <div id="details_corner">
+                <div id="detailed_corner_inner">
+                <h3>Details</h3>
+                <span id="status_span">
+                <p id="status_title">Status: </p>
+                <p class="status_in_details">Assigned</p>
+            </span>
+                <p id="detailed_fault_type">Fault type: Other</p>
+                <span id="priority_identification">
+                 <p >Priority: </p>
+                <span aria-label="orange priority color">
+                    <i class="material-icons priority_icons indentMe" alt="orange priority circle icon" id="priority_icons_id"> circle</i>
+                </span>
+                <p id="detailed_priority_text" >Priority 4 moderate</p>
+            </span>
+                <p id="detailed_date_reported">Date reported : 17th November 2022 </p>
+                <p id="detailed_building">Location: Sci 3.0 </p>
+                <p id="expected_resolve_date">Expected resolve date: 29th December 2022</p>
+        </div>
+        </div>
+        <div id="progress_cards_info">
+            <h3 id="progress_heading_text">Progress</h3>
+            <div id="progress_headers">
+                <button  class="progress_buttons">
+                    <i class="material-icons">edit_note</i>
+                    <p>Add note</p>
+                </button>
+                <div id="progress_headers_icons">
+                    <button id="collapse_button" class="progress_buttons">
+                        <img src="images/collapse.png" alt="collapse button image">
+                        <p cover_icon_text></p>
+                    </button>
+                    <button id="sorting_button" class="progress_buttons">
+                        <i class="material-icons" alt="sorting icon">swap_vert</i>
+                        <p class =" cover_icon_text">Sorting</p>
+                        </button>
+                </div>
+                </button>
+                </div>
+            <div id="id1203" class="progress_note_item">
+                <div class="progress_info">
+                    <i class="material-icons" alt="account icon"> account_circle </i>
+                    <p>Monish-Student</p>
+                    <p class="progress_info_date">21/11/22 9:02</p>
+                </div>
+                <p class="progress_info_state">NOTE</p>
+                <h4 class="progress_align">More information on fault</h4>
+                <div id="id_1203_info"class="hide_details">
+                    <p class="progress_align" >It seems that the building door for the lab is also broken</p>
+                </div>
+                <div class="progress_expand_icon" >
+                    <button class="expand_buttons" id="id_1203">
+                        <i  class="material-icons expand_icons" alt="expand more icon"  id="id_1203_expand">expand_more</i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="id12031" class="progress_note_item">
+                <div class="progress_info">
+                    <i class="material-icons" alt="account icon"> account_circle </i>
+                    <p>Rcihard-Admin</p>
+                    <p class="progress_info_date">29/11/22 11:03</p>
+                </div>
+                <p class="progress_info_state">ASSIGNED</p>
+                <h4 class="progress_align">Assigned to Estates</h4>
+                <div class="progress_expanded_info hide_details" id="id_12031_info">
+                    <p class="progress_align progress_main_details" >It seems that the building door for the lab is also broken</p>
+                </div>
+                <div class="progress_expand_icon">
+                    <button class="expand_buttons" id="id_12031">
+                        <i  class="material-icons expand_icons" alt="expand more icon"  id="id_12031_expand">expand_more</i>
+                    </button>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</div>
 <div class="tab_pages" id="tab4_page">
     Information to be given.
 </div>
